@@ -16,6 +16,7 @@ class HBF {
   // HBF structs
   struct maze_s {
     int g;  // iteration
+    int f;  // TODO perso : for heuristic
     double x;
     double y;
     double theta;
@@ -32,13 +33,18 @@ class HBF {
 
   int idx(double float_num);
 
-  vector<maze_s> expand(maze_s &state);
+  vector<maze_s> expand(maze_s &state, vector<int> &goal); // TODO perso : for heuristic)
 
   vector<maze_s> reconstruct_path(vector<vector<vector<maze_s>>> &came_from, 
                                   vector<double> &start, HBF::maze_s &final);
 
   maze_path search(vector<vector<int>> &grid, vector<double> &start, 
                    vector<int> &goal);
+                   
+  // TODO perso : heuristic function
+  int heuristic(double x, double y,vector<int> &goal);
+  bool min_maze(maze_s &state1, maze_s &state2);
+
 
  private:
   const int NUM_THETA_CELLS = 90;
